@@ -1,19 +1,43 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import "bootstrap/dist/css/bootstrap.css";
-import Counter from "./components/counter";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Counter />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const books = [
+  {
+    id: 1,
+    img:
+      "https://images-eu.ssl-images-amazon.com/images/I/91VokXkn8hL._AC_UL200_SR200,200_.jpg",
+    title: "Rich Dad Poor Dad",
+    author: "Robert Kiyosaki",
+  },
+  {
+    id: 2,
+    img:
+      "https://images-eu.ssl-images-amazon.com/images/I/81cpDaCJJCL._AC_UL200_SR200,200_.jpg",
+    title: "The Psychology of Money",
+    author: "Morgan Housel",
+  },
+];
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+function BookList() {
+  return (
+    <section className="booklist">
+      {books.map((book) => {
+        return <Book key={book.id} {...book}></Book>;
+      })}
+    </section>
+  );
+}
+
+const Book = (props) => {
+  const { img, title, author } = props;
+  return (
+    <article className="book">
+      <img src={img} alt=""></img>
+      <h1>{title}</h1>
+      <h4 onClick={() => console.log(title)}>{author}</h4>
+    </article>
+  );
+};
+
+ReactDOM.render(<BookList></BookList>, document.getElementById("root"));
